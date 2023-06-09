@@ -1,0 +1,18 @@
+diff --git a/node_modules/@vanilla-extract/integration/dist/vanilla-extract-integration.cjs.dev.js b/node_modules/@vanilla-extract/integration/dist/vanilla-extract-integration.cjs.dev.js
+index f9ece42..b552d95 100644
+--- a/node_modules/@vanilla-extract/integration/dist/vanilla-extract-integration.cjs.dev.js
++++ b/node_modules/@vanilla-extract/integration/dist/vanilla-extract-integration.cjs.dev.js
+@@ -354,7 +354,12 @@ function addFileScope({
+   globalAdapterIdentifier
+ }) {
+   // Encode windows file paths as posix
+-  const normalizedPath = path.posix.join(...path.relative(rootPath, filePath).split(path.sep));
++  let normalizedPath;
++  if (process.platform === "win32") {
++    normalizedPath = "/@fs/"+filePath.replace(/\\/g,"/")
++  } else {
++    normalizedPath = path.posix.join(...path.relative(rootPath, filePath).split(path.sep));
++  }
+   if (source.indexOf('@vanilla-extract/css/fileScope') > -1) {
+     return source.replace(/setFileScope\(((\n|.)*?)\)/, `setFileScope("${normalizedPath}", "${packageName}")`);
+   }
