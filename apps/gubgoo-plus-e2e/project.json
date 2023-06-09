@@ -1,0 +1,33 @@
+{
+  "name": "gubgoo-plus-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/gubgoo-plus-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/gubgoo-plus-e2e/cypress.config.ts",
+        "devServerTarget": "gubgoo-plus:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "gubgoo-plus:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "gubgoo-plus:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/gubgoo-plus-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["gubgoo-plus"]
+}
