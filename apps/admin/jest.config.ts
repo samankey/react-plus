@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'admin',
+  displayName: 'gubgoo-plus',
   preset: '../../jest.preset.js',
   transform: {
     '\\.css\\.ts$': '@vanilla-extract/jest-transform',
